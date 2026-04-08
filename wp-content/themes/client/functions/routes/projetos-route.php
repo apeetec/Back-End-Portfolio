@@ -33,11 +33,13 @@ function client_get_projetos( WP_REST_Request $request ) {
     $posts = get_posts( $args );
     $out = array();
     foreach ( $posts as $p ) {
+        $link = get_post_meta( $p->ID, 'projeto_link', true );
         $out[] = array(
             'id' => $p->ID,
             'title' => get_the_title( $p ),
             'excerpt' => wp_kses_post( wp_trim_words( $p->post_content, 40 ) ),
             'thumbnail' => get_the_post_thumbnail_url( $p->ID, 'full' ),
+            'link' => $link ? esc_url_raw( $link ) : '',
         );
     }
     return rest_ensure_response( $out );

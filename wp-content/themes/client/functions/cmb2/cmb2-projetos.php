@@ -59,4 +59,10 @@ function cmb2_arquivos()
 	),
 	'preview_size' => 'large', // Image size to use when previewing in the admin.
 ) );
+$cmb->add_field( array(
+		'name' => 'Link do projeto',
+		'desc' => 'Link para o projeto',
+		'id'   => 'projeto_link',
+		'type' => 'text_url',
+) );
 }

@@ -67,6 +67,8 @@ Arquivo(s) modificados:
 - `functions/routes/experiencia-route.php` — rota GET/UPDATE para `experiencia_carreira` (sanitização, CORS, logging, permission_callback)
 - `functions/routes/tech-stack-route.php` — rota GET/UPDATE para `tech_stack` (sanitização, CORS, logging, permission_callback)
 - `functions/routes/projetos-route.php` — rota GET pública para lista de projetos e rota EDITABLE para criar/atualizar projetos (sanitização, CORS, logging, permission_callback)
+- `functions/routes/contato-route.php` — rota GET (token) + POST (formulário de contato) com sistema completo de segurança anti-spam
+- `functions/admin/messages/admin-messages.php` — página admin para consulta, gerenciamento e exportação de mensagens recebidas
 
 Novas rotas
 - `GET /wp-json/client/v1/experiencia` — retorna `experiencias` (público, campos sanitizados)
@@ -75,5 +77,27 @@ Novas rotas
 - `POST /wp-json/client/v1/tech-stack` — atualiza tecnologias (requer manage_options + nonce or Application Password)
 - `GET /wp-json/client/v1/projetos` — retorna lista pública de projetos (campos limitados e sanitizados)
 - `POST /wp-json/client/v1/projetos` — cria/atualiza projeto (requer manage_options + nonce or Application Password)
+- `GET /wp-json/client/v1/contato` — retorna token único de submissão (público, validade 30 min)
+- `POST /wp-json/client/v1/contato` — envia mensagem de contato (público, rate-limited, anti-spam)
+
+Rota `/contato` — Camadas de segurança
+1. **IP Ban** — IPs banidos recebem resposta 200 silenciosa (sem vazamento de info)
+2. **Honeypot** (`_hp`) — campo invisível; bots que preenchem são descartados silenciosamente e logados
+3. **Token único** (`_token`) — obtido via GET, consumido no POST; previne replay attacks (expira em 30 min)
+4. **Rate limiting** — máximo 3 submissões por IP por hora (transient do WordPress)
+5. **Speed check** (`_load_time`) — submissões em menos de 2 s após carregamento são descartadas (bots são rápidos)
+6. **Sanitização explícita** — todos os campos são re-sanitizados independente dos `args` do `register_rest_route`
+7. **Auto-ban** — IPs com risk_score ≥ 3 são automaticamente banidos após uma submissão
+
+Tabela de mensagens
+- `wp_back_end_portfolio_contact_messages` — armazena todas as mensagens recebidas
+- Campos: `id`, `created_at`, `ip`, `nome`, `email`, `mensagem`, `status` (novo/lido/spam), `user_agent`, `risk_score`
+
+Página Admin (WP Admin → Mensagens)
+- Listagem paginada (20/página) com tabs por status
+- Filtros por e-mail e data
+- Ações por linha: marcar como lido, marcar como spam (+ bane IP), excluir
+- Bulk: limpar spam, exportar CSV, remover por antiguidade
+- Badge de contagem de novas mensagens no menu lateral
 
 

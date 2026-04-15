@@ -1,98 +1,216 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta name="viewport" content="width=device-width" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="robots" content="noindex,nofollow" />
-	<title>WordPress &#8250; ReadMe</title>
-	<link rel="stylesheet" href="wp-admin/css/install.css?ver=20100228" type="text/css" />
-</head>
-<body>
-<h1 id="logo">
-	<a href="https://wordpress.org/"><img alt="WordPress" src="wp-admin/images/wordpress-logo.png" /></a>
-</h1>
-<p style="text-align: center">Semantic Personal Publishing Platform</p>
+# 🚀 Back-End Portfolio
 
-<h2>First Things First</h2>
-<p>Welcome. WordPress is a very special project to me. Every developer and contributor adds something unique to the mix, and together we create something beautiful that I am proud to be a part of. Thousands of hours have gone into WordPress, and we are dedicated to making it better every day. Thank you for making it part of your world.</p>
-<p style="text-align: right">&#8212; Matt Mullenweg</p>
+Bem-vindo ao Back-End-Portfolio — um repositório centralizado para demonstrar projetos, experimentos e boas práticas de desenvolvimento back-end. Aqui você encontra (ou pode adicionar) micro-serviços, APIs, integrações com bancos de dados, pipelines CI/CD, exemplos de Dockerização e muito mais — tudo organizado para mostrar seu conhecimento e facilitar deploys e avaliações.
 
-<h2>Installation: Famous 5-minute install</h2>
-<ol>
-	<li>Unzip the package in an empty directory and upload everything.</li>
-	<li>Open <span class="file"><a href="wp-admin/install.php">wp-admin/install.php</a></span> in your browser. It will take you through the process to set up a <code>wp-config.php</code> file with your database connection details.
-		<ol>
-			<li>If for some reason this does not work, do not worry. It may not work on all web hosts. Open up <code>wp-config-sample.php</code> with a text editor like WordPad or similar and fill in your database connection details.</li>
-			<li>Save the file as <code>wp-config.php</code> and upload it.</li>
-			<li>Open <span class="file"><a href="wp-admin/install.php">wp-admin/install.php</a></span> in your browser.</li>
-		</ol>
-	</li>
-	<li>Once the configuration file is set up, the installer will set up the tables needed for your site. If there is an error, double check your <code>wp-config.php</code> file, and try again. If it fails again, please go to the <a href="https://wordpress.org/support/forums/">WordPress support forums</a> with as much data as you can gather.</li>
-	<li><strong>If you did not enter a password, note the password given to you.</strong> If you did not provide a username, it will be <code>admin</code>.</li>
-	<li>The installer should then send you to the <a href="wp-login.php">login page</a>. Sign in with the username and password you chose during the installation. If a password was generated for you, you can then click on &#8220;Profile&#8221; to change the password.</li>
-</ol>
+---
 
-<h2>Updating</h2>
-<h3>Using the Automatic Updater</h3>
-<ol>
-	<li>Open <span class="file"><a href="wp-admin/update-core.php">wp-admin/update-core.php</a></span> in your browser and follow the instructions.</li>
-	<li>You wanted more, perhaps? That&#8217;s it!</li>
-</ol>
+## 📌 Sumário
+- [Sobre](#-sobre)
+- [Objetivos deste repositório](#-objetivos-deste-repositório)
+- [Tecnologias (comuns no portfólio)](#-tecnologias-comuns-no-portf%C3%B3lio)
+- [Estrutura recomendada do repositório](#-estrutura-recomendada-do-reposit%C3%B3rio)
+- [Como usar / executar localmente](#-como-usar--executar-localmente)
+- [Modelo de README para projetos individuais](#-modelo-de-readme-para-projetos-individuais)
+- [Como adicionar um novo projeto](#-como-adicionar-um-novo-projeto)
+- [Boas práticas e checklist antes de enviar PR](#-boas-pr%C3%A1ticas-e-checklist-antes-de-enviar-pr)
+- [Deploy e CI/CD (orientações)](#-deploy-e-cicd-orienta%C3%A7%C3%B5es)
+- [Licença](#-licen%C3%A7a)
+- [Contribuições](#-contribui%C3%A7%C3%B5es)
+- [Contato](#-contato)
+- [Recursos e referências](#-recursos-e-refer%C3%AAncias)
 
-<h3>Updating Manually</h3>
-<ol>
-	<li>Before you update anything, make sure you have backup copies of any files you may have modified such as <code>index.php</code>.</li>
-	<li>Delete your old WordPress files, saving ones you&#8217;ve modified.</li>
-	<li>Upload the new files.</li>
-	<li>Point your browser to <span class="file"><a href="wp-admin/upgrade.php">/wp-admin/upgrade.php</a>.</span></li>
-</ol>
+---
 
-<h2>Migrating from other systems</h2>
-<p>WordPress can <a href="https://developer.wordpress.org/advanced-administration/wordpress/import/">import from a number of systems</a>. First you need to get WordPress installed and working as described above, before using <a href="wp-admin/import.php">our import tools</a>.</p>
+## ℹ️ Sobre
+Este repositório atua como vitrine técnica: cada pasta dentro de `projects/` (ou similar) representa um projeto/serviço back-end com seu próprio README, instruções de execução, exemplos de rotas, testes e, quando aplicável, Dockerfile e pipeline de CI.
 
-<h2>System Requirements</h2>
-<ul>
-	<li><a href="https://www.php.net/">PHP</a> version <strong>7.2.24</strong> or greater.</li>
-	<li><a href="https://www.mysql.com/">MySQL</a> version <strong>5.5.5</strong> or greater.</li>
-</ul>
+Ele foi pensado para:
+- Mostrar amplitude (vários frameworks/languages) e profundidade (boas práticas, testes, observabilidade).
+- Servir como base para entrevistas técnicas e demonstrações.
+- Facilitar reprodutibilidade (com Docker / docker-compose / scripts de inicialização).
 
-<h3>Recommendations</h3>
-<ul>
-	<li><a href="https://www.php.net/">PHP</a> version <strong>8.3</strong> or greater.</li>
-	<li><a href="https://www.mysql.com/">MySQL</a> version <strong>8.0</strong> or greater OR <a href="https://mariadb.org/">MariaDB</a> version <strong>10.6</strong> or greater.</li>
-	<li>The <a href="https://httpd.apache.org/docs/2.2/mod/mod_rewrite.html">mod_rewrite</a> Apache module.</li>
-	<li><a href="https://wordpress.org/news/2016/12/moving-toward-ssl/">HTTPS</a> support.</li>
-	<li>A link to <a href="https://wordpress.org/">wordpress.org</a> on your site.</li>
-</ul>
+---
 
-<h2>Online Resources</h2>
-<p>If you have any questions that are not addressed in this document, please take advantage of WordPress&#8217; numerous online resources:</p>
-<dl>
-	<dt><a href="https://wordpress.org/documentation/">HelpHub</a></dt>
-		<dd>HelpHub is the encyclopedia of all things WordPress. It is the most comprehensive source of information for WordPress available.</dd>
-	<dt><a href="https://wordpress.org/news/">The WordPress Blog</a></dt>
-		<dd>This is where you&#8217;ll find the latest updates and news related to WordPress. Recent WordPress news appears in your administrative dashboard by default.</dd>
-	<dt><a href="https://planet.wordpress.org/">WordPress Planet</a></dt>
-		<dd>The WordPress Planet is a news aggregator that brings together posts from WordPress blogs around the web.</dd>
-	<dt><a href="https://wordpress.org/support/forums/">WordPress Support Forums</a></dt>
-		<dd>If you&#8217;ve looked everywhere and still cannot find an answer, the support forums are very active and have a large community ready to help. To help them help you be sure to use a descriptive thread title and describe your question in as much detail as possible.</dd>
-	<dt><a href="https://make.wordpress.org/support/handbook/appendix/other-support-locations/introduction-to-irc/">WordPress <abbr>IRC</abbr> (Internet Relay Chat) Channel</a></dt>
-		<dd>There is an online chat channel that is used for discussion among people who use WordPress and occasionally support topics. The above wiki page should point you in the right direction. (<a href="https://web.libera.chat/#wordpress">irc.libera.chat #wordpress</a>)</dd>
-</dl>
+## 🎯 Objetivos deste repositório
+- Centralizar projetos back-end organizados e documentados.
+- Demonstrar capacidade de projetar APIs, autenticação, persistência e deploy.
+- Fornecer exemplos práticos de integração com bancos, filas e serviços externos.
+- Expor conhecimento em automação de testes e pipelines CI/CD.
 
-<h2>Final Notes</h2>
-<ul>
-	<li>If you have any suggestions, ideas, or comments, or if you (gasp!) found a bug, join us in the <a href="https://wordpress.org/support/forums/">Support Forums</a>.</li>
-	<li>WordPress has a robust plugin <abbr>API</abbr> (Application Programming Interface) that makes extending the code easy. If you are a developer interested in utilizing this, see the <a href="https://developer.wordpress.org/plugins/">Plugin Developer Handbook</a>. You shouldn&#8217;t modify any of the core code.</li>
-</ul>
+---
 
-<h2>Share the Love</h2>
-<p>WordPress has no multi-million dollar marketing campaign or celebrity sponsors, but we do have something even better&#8212;you. If you enjoy WordPress please consider telling a friend, setting it up for someone less knowledgeable than yourself, or writing the author of a media article that overlooks us.</p>
+## 🧰 Tecnologias (comuns no portfólio)
+Exemplos de tecnologias que costumam aparecer em um portfólio back-end:
+- Linguagens: Node.js (JavaScript/TypeScript), Python, Go, Java, Ruby
+- Frameworks: Express, FastAPI, Flask, Spring Boot, Gin
+- Bancos de dados: PostgreSQL, MySQL, MongoDB, Redis
+- Ferramentas: Docker, docker-compose, GitHub Actions, Make, Poetry, npm/yarn
+- Observabilidade: Prometheus, Grafana, Sentry, OpenTelemetry
+- Autenticação: JWT, OAuth2
+(Adapte conforme os projetos reais presentes neste repositório.)
 
-<p>WordPress is the official continuation of b2/caf&#233;log, which came from Michel V. The work has been continued by the <a href="https://wordpress.org/about/">WordPress developers</a>. If you would like to support WordPress, please consider <a href="https://wordpress.org/donate/">donating</a>.</p>
+---
 
-<h2>License</h2>
-<p>WordPress is free software, and is released under the terms of the <abbr>GPL</abbr> (GNU General Public License) version 2 or (at your option) any later version. See <a href="license.txt">license.txt</a>.</p>
+## 📁 Estrutura recomendada do repositório
+Sugestão de layout para manter o repositório organizado:
 
-</body>
-</html>
+- /projects
+  - /project-a
+    - README.md
+    - src/
+    - tests/
+    - Dockerfile
+    - docker-compose.yml (opcional)
+    - .env.example
+  - /project-b
+- /docs (documentação geral, arquitetura, diagramas)
+- /scripts (scripts utilitários, seeds, migrações simples)
+- /deploy (manifests, helm charts, terraform - se existir)
+- README.md (este arquivo)
+- LICENSE
+
+---
+
+## ▶️ Como usar / executar localmente
+Passos gerais (cada projeto deve ter instruções específicas em seu README):
+
+1. Clone o repositório
+   ```bash
+   git clone https://github.com/apeetec/Back-End-Portfolio.git
+   cd Back-End-Portfolio
+   ```
+
+2. Entre no diretório do projeto desejado e siga o README dele:
+   ```bash
+   cd projects/nome-do-projeto
+   ```
+
+3. Exemplos comuns:
+   - Usando Docker
+     ```bash
+     docker build -t nome-do-projeto .
+     docker run --env-file .env.example -p 8000:8000 nome-do-projeto
+     ```
+   - Usando docker-compose (quando houver)
+     ```bash
+     docker-compose up --build
+     ```
+   - Ambiente Python (exemplo)
+     ```bash
+     python -m venv .venv
+     source .venv/bin/activate
+     pip install -r requirements.txt
+     ./manage.py run
+     ```
+   - Ambiente Node.js (exemplo)
+     ```bash
+     npm install
+     npm run dev
+     ```
+
+4. Testes
+   - Execute os testes que existirem em cada projeto (ex.: `pytest`, `npm test`, `mvn test`).
+
+---
+
+## 📄 Modelo de README para projetos individuais
+Use este template ao adicionar um projeto — facilita avaliação e reprodução.
+
+### Título do Projeto
+- Descrição curta (o que é e objetivo)
+
+### Tecnologias
+- Lista de tecnologias e versões
+
+### Pré-requisitos
+- Docker, Postgres, Node 18, Python 3.11, etc.
+
+### Instalação
+- Passos para rodar localmente (ex.: clonar, instalar dependências, criar .env)
+
+### Como rodar
+- Comandos para executar (dev/prod)
+
+### Rotas / Endpoints
+- Exemplos de rotas principais com curl
+
+### Testes
+- Como rodar a suíte de testes
+
+### Observabilidade
+- Como acessar logs, métricas, dashboard (se houver)
+
+### Notas de arquitetura
+- Diagrama conceitual, decisões arquiteturais, trade-offs
+
+---
+
+## ➕ Como adicionar um novo projeto
+1. Crie uma pasta em `projects/` com o nome do projeto.
+2. Adicione o código, `README.md` seguindo o modelo acima, `Dockerfile` e `.env.example`.
+3. Garanta que:
+   - O projeto rode isoladamente com `docker-compose` ou um comando simples.
+   - Tests existam e passem localmente.
+4. Abra um Pull Request descrevendo:
+   - O que o projeto faz
+   - Endpoints principais
+   - Como testar manualmente
+   - Observações sobre segurança e dados sensíveis
+5. Mantenedores revisarão e sugerirão melhorias.
+
+---
+
+## ✅ Boas práticas e checklist antes de enviar PR
+- [ ] Código formatado (prettier, black, gofmt, etc.)
+- [ ] Testes automatizados cobrindo fluxos importantes
+- [ ] Documentação para rodar localmente e em produção
+- [ ] Variáveis sensíveis em `.env` e `.env.example` (mas **NUNCA** commitar `.env` real)
+- [ ] Dockerfile e/ou docker-compose para reprodutibilidade
+- [ ] CI configurado (ex.: GitHub Actions) para rodar testes e lint
+
+---
+
+## ☁️ Deploy e CI/CD (orientações)
+- Automatize builds e testes via GitHub Actions:
+  - Fluxo comum: push → build → test → imagem Docker (registry) → deploy (staging/prod)
+- Exemplos de plataformas para deploy simples:
+  - Render, Railway, Heroku, DigitalOcean App Platform, AWS Elastic Beanstalk, ECS/Fargate
+- Para deploy com banco de dados:
+  - Use migrações (Flyway, Alembic, Django migrations) e scripts de seed seguros
+  - Proteja credenciais com Secrets do provedor ou GitHub Secrets
+
+---
+
+## 📜 Licença
+Por padrão, adicione uma licença apropriada (ex.: MIT) no arquivo `LICENSE`. Se quiser, posso adicionar um template de licença (MIT) neste repositório.
+
+---
+
+## 🤝 Contribuições
+Contribuições são bem-vindas!
+- Abra um issue para propor um novo projeto ou melhoria.
+- Faça forks e envie PRs com descrições claras.
+- Use commits claros e mensagens de PR que expliquem o motivo da mudança.
+
+---
+
+## ✉️ Contato
+- GitHub: [@apeetec](https://github.com/apeetec)
+- Para incluir seu próprio projeto neste portfólio, abra uma issue ou envie um PR.
+
+---
+
+## 📚 Recursos e referências
+- Docker: https://docs.docker.com
+- GitHub Actions: https://docs.github.com/actions
+- Boas práticas de APIs REST: https://restfulapi.net
+- Twelve-Factor App: https://12factor.net
+
+---
+
+Obrigado por usar este repositório como vitrine técnica — se quiser, eu posso:
+- Gerar automaticamente um arquivo LICENSE (MIT).
+- Abrir um pull request com este README pronto no branch `main` ou em um branch novo.
+- Gerar um template de workflow GitHub Actions básico para CI.
+
+Basta me dizer qual ação prefere que eu execute.
